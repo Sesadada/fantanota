@@ -33,10 +33,7 @@ const Home = async () => {
         </div>
         <div className="mt-8">
           <Link href="/dashboard">
-            <Button className="bg-sky-500 text-white">
-              Go to your stuff
-              <ArrowRight className="w-6 h-6 ml-2" stroke="white" />
-            </Button>
+            <Button>Go to your stuff</Button>
           </Link>
         </div>
       </div>

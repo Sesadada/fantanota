@@ -22,8 +22,7 @@ const DeleteButton = ({ noteId }: Props) => {
   });
   return (
     <Button
-      variant={"destructive"}
-      size="sm"
+      className="bg-red-500"
       onClick={() => {
         const confirm = window.confirm(
           "Are you sure you want to delete this note?"

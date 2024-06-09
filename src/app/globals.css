@@ -75,6 +75,12 @@
   }
 }
 
+@layer components {
+  .base-button {
+    @apply hover:shadow-sm shadow-2xl px-6 py-3 font-bold rounded-xl bg-gradient-to-r from-sky-400 to-purple-300 text-white;
+  }
+}
+
 .tiptap.ProseMirror {
   outline: none;
 }

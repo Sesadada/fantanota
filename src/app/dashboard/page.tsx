@@ -40,10 +40,7 @@ const DashboardPage = async (props: Props) => {
           <div className="flex justify-between items-center md:flex-row flex-col">
             <div className="flex items-center">
               <Link href="/">
-                <Button className="bg-purple-400" size="sm">
-                  <ArrowLeft className="mr-1 w-4 h-4" />
-                  Dashboard
-                </Button>
+                <Button>Dashboard</Button>
               </Link>
               <div className="w-4"></div>
               <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-sky-400">

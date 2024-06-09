@@ -10,6 +10,7 @@ import Text from "@tiptap/extension-text";
 import axios from "axios";
 import { NoteType } from "@/lib/db/schema";
 import { useCompletion } from "ai/react";
+import Link from "next/link";
 
 type Props = { note: NoteType };
 
@@ -74,17 +75,18 @@ const TipTapEditor = ({ note }: Props) => {
   }, [debouncedEditorState]);
   return (
     <>
-      <div className="flex">
+      <div className="flex w-full">
         {editor && <TipTapMenuBar editor={editor} />}
-        <Button disabled variant={"outline"}>
-          {saveNote.isPending ? "Saving..." : "Saved"}
-        </Button>
       </div>
 
       <div className="prose prose-sm w-full mt-4">
         <EditorContent editor={editor} />
       </div>
-      <div className="h-4"></div>
+      <div className="flex justify-end w-full">
+        <Link href="/dashboard">
+          <Button>Save</Button>
+        </Link>
+      </div>
     </>
   );
 };

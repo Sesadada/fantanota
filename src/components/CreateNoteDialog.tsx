@@ -74,11 +74,7 @@ const CreateNoteDialogue = () => {
           />
           <div className="h-4"></div>
           <div className="flex items-center gap-2">
-            <Button
-              type="reset"
-              variant={"secondary"}
-              onClick={() => setIsOpen(false)}
-            >
+            <Button type="reset" onClick={() => setIsOpen(false)}>
               Cancel
             </Button>
             <Button type="submit" className="bg-pink-600">
