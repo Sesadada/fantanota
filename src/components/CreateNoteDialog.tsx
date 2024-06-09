@@ -6,6 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "./ui/dialog";
 import { Plus } from "lucide-react";
 import { DialogDescription } from "@radix-ui/react-dialog";
@@ -18,6 +19,7 @@ import { useRouter } from "next/navigation";
 const CreateNoteDialogue = () => {
   const router = useRouter();
   const [input, setInput] = useState("");
+  const [isOpen, setIsOpen] = useState(false); // State to control dialog visibility
 
   const createNotebook = useMutation({
     mutationFn: async () => {
@@ -37,9 +39,8 @@ const CreateNoteDialogue = () => {
     createNotebook.mutate(undefined, {
       onSuccess: ({ note_id }) => {
         console.log("created new note:", { note_id });
-        // hit another endpoint to uplod the temp dalle url to permanent firebase url
-        // uploadToFirebase.mutate(note_id);
         router.push(`/notebook/${note_id}`);
+        setIsOpen(false); // Close the dialog on success
       },
       onError: (error) => {
         console.error(error);
@@ -47,9 +48,10 @@ const CreateNoteDialogue = () => {
       },
     });
   };
+
   return (
-    <Dialog>
-      <DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
         <div className="border-dashed border-2 flex border-green-600 h-full rounded-lg items-center justify-center sm:flex-col hover:shadow-xl transition hover:-translate-y-1 flex-row p-4">
           <Plus className="w-6 h-6 text-green-600" strokeWidth={3} />
           <h2 className="font-semibold text-green-600 sm:mt-2">
@@ -72,7 +74,11 @@ const CreateNoteDialogue = () => {
           />
           <div className="h-4"></div>
           <div className="flex items-center gap-2">
-            <Button type="reset" variant={"secondary"}>
+            <Button
+              type="reset"
+              variant={"secondary"}
+              onClick={() => setIsOpen(false)}
+            >
               Cancel
             </Button>
             <Button type="submit" className="bg-pink-600">

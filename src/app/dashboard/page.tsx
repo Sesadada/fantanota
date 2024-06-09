@@ -12,7 +12,19 @@ import React from "react";
 
 type Props = {};
 
+async function fetchPosts() {
+  const { userId } = auth();
+  const notes = await db
+    .select()
+    .from($notes)
+    .where(eq($notes.userId, userId!));
+
+  return notes;
+}
+
 const DashboardPage = async (props: Props) => {
+  const test = await fetchPosts();
+  console.log("testing");
   const { userId } = auth();
   const notes = await db
     .select()
@@ -29,7 +41,7 @@ const DashboardPage = async (props: Props) => {
               <Link href="/">
                 <Button className="bg-green-600" size="sm">
                   <ArrowLeft className="mr-1 w-4 h-4" />
-                  Back
+                  Dashboard
                 </Button>
               </Link>
               <div className="w-4"></div>
