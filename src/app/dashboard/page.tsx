@@ -12,19 +12,7 @@ import React from "react";
 
 type Props = {};
 
-async function fetchPosts() {
-  const { userId } = auth();
-  const notes = await db
-    .select()
-    .from($notes)
-    .where(eq($notes.userId, userId!));
-
-  return notes;
-}
-
 const DashboardPage = async (props: Props) => {
-  const test = await fetchPosts();
-  console.log("testing");
   const { userId } = auth();
   const notes = await db
     .select()
@@ -54,15 +42,13 @@ const DashboardPage = async (props: Props) => {
           <div className="h-8"></div>
           <Separator />
           <div className="h-8"></div>
-          {/* list all the notes */}
-          {/* if no notes, display this */}
+
           {notes.length === 0 && (
             <div className="text-center">
               <h2 className="text-xl text-gray-500">You have no notes yet.</h2>
             </div>
           )}
 
-          {/* display all the notes */}
           <div className="grid sm:grid-cols-3 md:grid-cols-5 grid-cols-1 gap-3">
             <CreateNoteDialog />
             {notes.map((note) => {
