@@ -1,11 +1,9 @@
 import TypewriterTitle from "@/components/TypewriterTitle";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { $notes } from "@/lib/db/schema";
-import { eq } from "drizzle-orm";
 
 const Home = async () => {
   const allNotes = await db.select().from($notes);
@@ -29,7 +27,7 @@ const Home = async () => {
             {allNotes &&
               allNotes.map((note, index) => (
                 <div key={index}>
-                  <h2>{note.name}</h2> // Displaying the name of each note
+                  <h2>{note.name}</h2>
                   <p>{note.createdAt.toISOString()}</p>
                 </div>
               ))}
@@ -38,7 +36,7 @@ const Home = async () => {
         <div className="mt-8">
           <Link href="/dashboard">
             <Button className="bg-sky-500 text-white">
-              Go to your stuff{" "}
+              Go to your stuff
               <ArrowRight className="w-6 h-6 ml-2" stroke="white" />
             </Button>
           </Link>
