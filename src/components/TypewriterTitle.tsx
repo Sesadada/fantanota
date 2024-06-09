@@ -8,19 +8,19 @@ const TypewriterTitle = (props: Props) => {
     <Typewriter
       onInit={(typewriter) => {
         typewriter
-          .typeString("Incredible")
-          .pauseFor(200)
+          .typeString("The others are writing")
+          .pauseFor(100)
+          .deleteAll()
+          .typeString("Something")
+          .pauseFor(100)
           .deleteAll()
           .typeString("Sexy")
-          .pauseFor(200)
-          .deleteAll()
-          .typeString("Your new magic note pad")
-          .pauseFor(200)
+          .pauseFor(100)
           .deleteAll()
           .start();
       }}
       options={{
-        strings: ["Incredible", "Sexy", "Your new magic note pad"],
+        strings: ["The others are writing", "Something", "Sexy"],
         autoStart: true,
         loop: true,
       }}

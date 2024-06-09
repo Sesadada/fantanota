@@ -4,33 +4,31 @@ import { db } from "@/lib/db";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { $notes } from "@/lib/db/schema";
+import UserPosts from "@/components/UserPosts";
+import AllUsersGrid from "@/components/AllUsersGrid";
 
 const Home = async () => {
   const allNotes = await db.select().from($notes);
 
+  const formattedNotes = allNotes.map((note) => ({
+    ...note,
+    createdAt: note.createdAt.toISOString(), // Convert Date to string
+  }));
+
   return (
     <div className="bg-gradient-to-r min-h-screen from-rose-100 to-sky-100 h-screen">
       <div className="flex items-center justify-center h-screen flex-col">
-        <h1 className="text-7xl py-4 font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-sky-400">
-          Incredible Blog
+        <h1 className="text-7xl py-2 font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-sky-400">
+          Ideas Peep Show
         </h1>
         <div>
-          <h2 className="text-4xl font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-sky-400">
-            Bits of Ideas
-          </h2>
-          <h3 className="text-2xl mt-4 text-center text-slate-600 font-extralight">
+          <h3 className="text-2xl my-4 text-center text-slate-600 font-extralight">
             <TypewriterTitle />
           </h3>
         </div>
         <div>
           <div className="grid grid-cols-3 gap-4">
-            {allNotes &&
-              allNotes.map((note, index) => (
-                <div key={index}>
-                  <h2>{note.name}</h2>
-                  <p>{note.createdAt.toISOString()}</p>
-                </div>
-              ))}
+            <AllUsersGrid notes={formattedNotes} />
           </div>
         </div>
         <div className="mt-8">
